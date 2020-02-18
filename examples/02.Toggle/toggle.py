@@ -1,0 +1,10 @@
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(2, GPIO.IN)
+
+while True:
+    time.sleep(0.5)
+    button = GPIO.input(2)
+    print(button)
