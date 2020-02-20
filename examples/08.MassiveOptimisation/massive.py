@@ -1,25 +1,23 @@
 import RPi.GPIO as GPIO
-
-
-def isPressed(btn, led):
-    state = 1 - GPIO.input(btn)
-    GPIO.output(led, state)
-
-
-leds = [12, 13, 14, 18]
-buttons = [2, 3, 4, 8]
+import time
 
 GPIO.setmode(GPIO.BCM)
-for i in range(4):
-    GPIO.setup(leds[i], GPIO.OUT)
-    GPIO.setup(buttons[i], GPIO.IN)
+leds = [12, 13, 14, 18]
 
-try:
-    while True:
-        for i in range(4):
-            isPressed(buttons[i], leds[i])
-except KeyboardInterrupt:
-    print('The program was stopped by keyboard.')
-finally:
-    GPIO.cleanup()
-    print('GPIO cleanup completed.')
+for led in leds:
+    GPIO.setup(led, GPIO.OUT)
+    GPIO.output(led, GPIO.HIGH)
+
+time.sleep(3)
+
+for led in leds:
+    GPIO.output(led, GPIO.LOW)
+
+GPIO.cleanup()
+
+#
+#(5) Создаём массив светодиодов.
+#(7) В цикле for настраиваем пины светодиодов на режим цифрового выхода и сразу включаем их.
+#(13) Через 3 секунды после включения гасим светодиоды.
+#(16) Освобождаем пины от управления программой.
+#

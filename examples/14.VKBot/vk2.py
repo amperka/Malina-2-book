@@ -15,14 +15,12 @@ led = 18
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(led, GPIO.OUT)
 
-
 def write_msg(user_id, msg, random):
     vk.method('messages.send', {
         'user_id': user_id,
         'message': msg,
         'random_id': random,
     })
-
 
 try:
     while True:
@@ -43,9 +41,15 @@ try:
                 err_msg = 'Send "On" or "Off"'
                 write_msg(my_id, err_msg, random)
         time.sleep(1)
-    GPIO.setmode(GPIO.BCM)
 except KeyboardInterrupt:
     print('The program was stopped by keyboard.')
 finally:
     GPIO.cleanup()
     print('GPIO cleanup completed.')
+
+#
+#(3) Подключаем библиотеку работы с GPIO.
+#(13-16) Настраиваем режим работы на выход.
+#(34-42) В зависимости от сообщения — включаем или выключаем светодиод и отправляем текущее состояние.
+#(47) Сбрасываем пины в изначальное состояние
+#

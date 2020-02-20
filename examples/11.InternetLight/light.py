@@ -8,16 +8,13 @@ GPIO.setup(led, GPIO.OUT)
 
 app = Flask('lightControl')
 
-
 @app.route('/')
 def index():
     return send_file('light.html')
 
-
 @app.route('/images/<filename>')
 def get_image(filename):
     return send_file('images/' + filename)
-
 
 @app.route('/turnOn')
 def index():
@@ -34,4 +31,10 @@ try:
 finally:
 	GPIO.cleanup()
 	print('GPIO cleanup completed.')
-	
+
+#
+#(4-7) Настраиваем пин 18 на работу со светодиодом.
+#(11-13) Отдаём клиенту страницу с кнопкой light.html.
+#(19-27) При запросе клиента turnOff или turnOn вызываем соответствующий обработчик.
+#(29-33) {sign Lighting} ВАЖНО! Обработка исключения except KeyboardInterrupt здесь не нужна, так как она уже реализована внутри Flask.
+#
