@@ -1,2 +1,2 @@
-# Malina-2-book
-Malina 2 set brochure and examples
+# Malina-book
+Malina set examples
